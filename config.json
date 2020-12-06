@@ -1,0 +1,13 @@
+﻿{
+    "connectionString": "mongodb://localhost/node-mongo-signup-verification-api",
+    "secret": "f70269b9-97c2-43e8-921c-77e8dbc73035",
+    "emailFrom": "info@news-classifyer.com",
+    "smtpOptions": {
+        "host": "smtp.ethereal.email",
+        "port": 587,
+        "auth": {
+            "user": "stefan57@ethereal.email",
+            "pass": "kTSHHN3WjBtChmcb6S"
+        }
+    }
+}
