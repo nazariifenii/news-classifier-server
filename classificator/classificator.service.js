@@ -1,16 +1,33 @@
+const axios = require("axios");
+
 module.exports = {
-    processText
-}
+  processText,
+};
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+const pythonServerApi =
+  process.env.CLASSIFIER_API_URL || "http://localhost:5000";
 
-async function processText(text) {
-    console.log("Processing text: ", text)
-    await sleep(1000);
-    return {
-        "sport": "0.7",
-        "politics": "0.3"
-    }
+async function processText(title, text) {
+  console.log("Processing text: ", title, text);
+  let classificationResult;
+  await axios({
+    method: "post",
+    url: pythonServerApi + "/classify-news",
+    headers: {},
+    data: {
+      title: title,
+      text: text,
+    },
+  })
+    .then((response) => {
+      console.log(
+        "makeClassification resp: ",
+        response.data.classification_result
+      );
+      classificationResult = response.data.classification_result;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  return { processingResult: classificationResult };
 }
